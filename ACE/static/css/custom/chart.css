@@ -1,0 +1,24 @@
+.ct-chart .ct-point, .ct-chart .ct-line {
+  stroke: gray;
+}
+
+.ct-chart .ct-series.ct-series-e .ct-point, .ct-chart .ct-series.ct-series-e .ct-line {
+  stroke: violet;
+}
+
+.ct-chart .ct-series.ct-series-f .ct-point, .ct-chart .ct-series.ct-series-f .ct-line {
+  stroke: olive;
+}
+
+.ct-chart .ct-point, .ct-chart .ct-line {
+  stroke: blue;
+}
+
+.ct-chart .ct-series.ct-series-e .ct-point, .ct-chart .ct-series.ct-series-e .ct-line {
+  stroke: brown;
+}
+
+.ct-chart .ct-series.ct-series-f .ct-point, .ct-chart .ct-series.ct-series-f .ct-line {
+  stroke: rgb(0, 128, 64);
+}
+

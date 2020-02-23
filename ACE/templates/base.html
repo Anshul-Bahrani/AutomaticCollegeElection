@@ -3,7 +3,11 @@
 <html lang="en">
 
 <head>
-  {% include 'includes/header.html' %}
+  {% include 'includes/headsection.html' %}
+
+  {% block css%}
+      <link href="{% static 'css/custom/chart.css' %}" rel="stylesheet" />
+  {% endblock%}
 </head>
 
 <body>
@@ -32,4 +36,5 @@
   <!-- Chartist JS -->
   <script src="{% static 'js/plugins/chartist.min.js' %}"></script>
   <script src="{% static 'js/custom/chart.js' %}"></script>
+  {% block javascript %}{% endblock %}
 </html>
