@@ -38,6 +38,17 @@ class Nominee(MetaDataModel):
     election = models.ForeignKey('Election', on_delete=models.CASCADE)
     is_Verified = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = _('Nominee')
+        verbose_name_plural = _('Nominees')
+
+    def __str__(self):
+        return self.nominee_id
+
+    def get_absolute_url(self):
+        return reverse("voting:position_list")
+
 class Election(MetaDataModel):
 
     id = models.BigAutoField(primary_key=True)

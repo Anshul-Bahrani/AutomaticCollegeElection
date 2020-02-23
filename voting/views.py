@@ -12,15 +12,15 @@ from django.views.generic import (
     DetailView,
 )
 
-from .models import Position, Nominee
+from .models import Position, Nominee, Election
 
 
 class PositionListView(ListView):
 
-    template_name = 'voting/position_list.html'
+    template_name = 'voting/position-list.html'
     model = Position
     context_object_name = 'positions'
-    paginate_by = 20
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         # pylint: disable=arguments-differ
@@ -35,7 +35,7 @@ class PositionCreateView(LoginRequiredMixin, CreateView):
     model = Position
     template_name = 'voting/position-create.html'
     fields = ['name', 'type']
-    success_message = "%(title)s was created successfully"
+    success_message = "%(name)s was created successfully"
 
 class NomineeCreateView(CreateView):
 
@@ -43,3 +43,18 @@ class NomineeCreateView(CreateView):
     template_name = 'voting/nominee-create.html'
     fields = ['agenda', 'election']
     success_message = "%(title)s was created successfully"
+
+    def form_valid(self, form):
+        form.instance.nominee_id = self.request.user
+        return super().form_valid(form)
+
+class ElectionCreateView(CreateView):
+
+    model = Election
+    template_name = 'voting/election-create.html'
+    fields = ['position', 'term', 'start_at', 'duration', 'nomination_deadline']
+    success_message = "%(title)s was created successfully"
+
+    def form_valid(self, form):
+        form.instance.registrar = self.request.user
+        return super().form_valid(form)
