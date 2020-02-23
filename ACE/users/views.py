@@ -51,6 +51,7 @@ class ProfileView(View):
         form = UserUpdateForm(instance=request.user)
         context = {
             'form' : form,
+            'sidebarSection' : 'profile'
         }
         return render(request, self.template_name, context)
 
