@@ -5,14 +5,15 @@
       Tip 2: you can also add an image using data-image tag
   -->
       <div class="logo">
-        <a href="#" class="simple-text logo-normal">
+        <a href="{% url 'home' %}" class="simple-text logo-normal">
+          <i class="material-icons">account_balance</i>
           ACE
         </a>
       </div>
 
 <div class="sidebar-wrapper">
         <ul class="nav">
-          {% if sidebarSection == 'dashboard' %}
+          {% if sidebarSection == 'dashboard' or sidebarSection == null %}
             <li class="nav-item active">
           {% else %}
             <li class="nav-item">
@@ -23,19 +24,23 @@
             </a>
           </li>
           <!-- your sidebar here -->
+          {% if sidebarSection == 'profile' %}
+            <li class="nav-item active">
+          {% else %}
+            <li class="nav-item">
+          {% endif %}
+            <a class="nav-link" href="{% url 'users:profile' %}">
+              <i class="material-icons">account_circle</i>
+              <p>View Profile</p>
+            </a>
+          </li>
           {% if sidebarSection == 'position' %}
             <li class="nav-item active">
           {% else %}
             <li class="nav-item">
           {% endif %}
-            <a class="nav-link" href="#">
-              <i class="material-icons">account_circle</i>
-              <p>View Profile</p>
-            </a>
-          </li>
-          <li class="nav-item ">
             <a class="nav-link" href="{% url 'voting:position_list' %}">
-              <i class="material-icons"></i>
+              <i class="material-icons">reorder</i>
               <p>Position</p>
             </a>
           </li>
