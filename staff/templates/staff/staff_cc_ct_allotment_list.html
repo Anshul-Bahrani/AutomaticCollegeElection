@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Position
+{% endblock title %}
+{% block bodycontent %}
+    <div class="container">
+      <a class="btn btn-primary" href="{% url 'staff:ctcc_create' %}">
+        <i class="material-icons">add</i>
+        Add Term
+      </a>
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Term</h4>
+            <!-- <p class="card-category"> Here is a subtitle for this table</p> -->
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>#</th>
+                    <th>Term</th>
+                    <th>Division</th>
+                    <th>Class Teacher</th>
+                    <th>Class Counsellor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for object in objects %}
+                    <tr>
+                      <td>{{ foorloop.counter }}</td>
+                      <td>{{object.term_id}}</td>
+                      <td>{{object.division}}</td>
+                      <td>{{object.class_teacher}}</td>
+                      <td>{{object.class_counsellor}}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% include 'includes/paginate.html' %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+{% endblock bodycontent %}

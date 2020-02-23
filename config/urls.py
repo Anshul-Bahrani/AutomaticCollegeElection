@@ -52,6 +52,7 @@ urlpatterns = [
     path('users/', include(f'{settings.APP_NAME}.users.urls', namespace='users')),
     path('voting/', include('voting.urls', namespace='voting')),
     path('academics/', include('academics.urls', namespace='academics')),
+    path('staff/', include('staff.urls', namespace='staff')),
 ]
 
 if settings.DEBUG:
