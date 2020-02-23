@@ -21,3 +21,6 @@ class StaffCtCcAllotment(MetaDataModel):
     division = models.ForeignKey(Department, on_delete=models.CASCADE)
     class_teacher = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='class_teacher')
     class_counsellor = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='class_counsellor')
+
+    def __str__(self):
+        return self.term

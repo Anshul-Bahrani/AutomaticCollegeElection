@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import CustomUser
+from .forms import UserRegisterForm
 
 admin.AdminSite.site_header = "Admin"
 admin.AdminSite.site_title = "Site admin"
@@ -10,6 +11,8 @@ admin.AdminSite.index_title = "site adminstration"
 @admin.register(CustomUser)
 class CustomUserAdmin(BaseUserAdmin):
 
+    add_form = UserRegisterForm
+    form = UserRegisterForm
     list_display = ('__str__', 'first_name', 'last_name', 'is_active', 'last_login')
     list_display_links = ('__str__',)
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')

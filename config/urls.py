@@ -48,6 +48,7 @@ urlpatterns = [
     ),
     path('tinymce/', include('tinymce.urls')),
     path('users/', include(f'{settings.APP_NAME}.users.urls', namespace='users')),
+    path('voting/', include('voting.urls', namespace='voting')),
 ]
 
 if settings.DEBUG:
