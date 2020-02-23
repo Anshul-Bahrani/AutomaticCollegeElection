@@ -17,11 +17,18 @@
                 </a>
               </li>
               <!-- your navbar here -->
+              {% if user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link" href="javascript:;">
+                <a class="nav-link" href="accounts/logout/">
                   <i class="material-icons">power_settings_new</i> Logout
                 </a>
               </li>
+              {% else %}
+              <li class="nav-item">
+                <a title="Google" class="socialaccount_provider google" href="/accounts/google/login/?process=login">
+                  <i class="material-icons">input</i> Google</a>
+              </li>
+              {%endif%}
             </ul>
           </div>
         </div>

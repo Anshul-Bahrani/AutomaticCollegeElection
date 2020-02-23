@@ -21,6 +21,13 @@ class CtCcCreateView(CreateView):
     fields = ['term_id', 'division', 'class_teacher', 'class_counsellor']
     success_message = "%(title)s was created successfully"
 
+    def form_valid(self, form):
+        print("######################", form.instance.class_teacher.role.role_number)
+        if(form.instance.class_teacher.role.role_number == 1 and form.instance.class_counsellor.role.role_number == 1):
+            return super().form_valid(form)
+
+        return HttpResponse("404")
+
 class CtCcListView(ListView):
 
     template_name = 'staff/staff_cc_ct_allotment_list.html'

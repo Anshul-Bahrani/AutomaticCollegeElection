@@ -11,9 +11,7 @@ admin.AdminSite.index_title = "site adminstration"
 @admin.register(CustomUser)
 class CustomUserAdmin(BaseUserAdmin):
 
-    add_form = UserRegisterForm
-    form = UserRegisterForm
-    list_display = ('__str__', 'first_name', 'last_name', 'is_active', 'last_login')
+    list_display = ('__str__', 'first_name', 'last_name', 'role', 'department_id', 'is_active', 'last_login')
     list_display_links = ('__str__',)
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')
     list_per_page = 10

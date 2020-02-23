@@ -3,8 +3,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
 from allauth.account.forms import SignupForm
-
-from .models import CustomUser
+from academics.models import Department
+from .models import CustomUser, UserRole
 
 
 
@@ -40,6 +40,9 @@ class CustomSignupForm(SignupForm):
         user.mobile = 0
         user.gender =  'M'
         user.date_Of_birth =  '1999-12-16'
+        student = UserRole.objects.get(role_number=2)
+        user.role = student
+        user.department_id = Department.objects.get(code=2)
         user.save()
         return user
 

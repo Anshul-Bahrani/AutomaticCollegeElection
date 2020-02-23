@@ -88,3 +88,9 @@ class ElectionListView(ListView):
         # Add in a QuerySet of all the books
         context['sidebarSection'] = 'election'
         return context
+
+# class VotingView(View):
+
+#     def get(self, request, *args, **kwargs):
+#         user = request.user
+
