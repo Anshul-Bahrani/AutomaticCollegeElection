@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
   {% block bodycontent %}
       <div class="content">
@@ -11,9 +12,8 @@
                   <p class="card-category">leader profile</p>
                 </div>
                 <div class="card-body">
-                  <form>
-                  {% comment %} {{form}} {% endcomment %}
-                    <div class="row">
+                  <form method='POST'>
+                    <!-- <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
                           <div class="dropdown">
@@ -28,40 +28,30 @@
                           </div>
                         </div>
                       </div>
-                    </div>
-
-
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">First Name <img class="img-fluid" src="{% static 'img/user.svg'%}" alt=""></label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Last Name <img class="img-fluid" src="{% static 'img/user.svg' %}" alt=""></label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-
+                    </div> -->
+                    {% csrf_token %}
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Email address <img src="{% static 'img/email1.svg' %}" alt=""></label>
-                          <input type="email" class="form-control">
+                          <label class="bmd-label-floating"><img src="{% static 'img/email1.svg' %}" alt="">Email address</label>
+                          <input type="email" value="{{ user.email }}" class="form-control" readonly>
                         </div>
                       </div>
                     </div>
 
 
+                    <div id="div_id_election" class="form-group">
+                      <label for="id_election" class="bmd-label-floating requiredField">Election<span class="asteriskField">*</span></label>
+                      <select name="election" class="select form-control is-invalid" id="id_election">
+                        {% for id, name in form.election.field.choices %}
+                          <option value="{{ id }}">{{ name }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating" name="agenda">Agenda / Reason <img src="{% static 'img/agenda.svg' %}" alt=""></label>
-                          <textarea class="form-control" rows="5" id="comment"></textarea>
+                          {{ form.agenda|as_crispy_field }}
                         </div>
                       </div>
                     </div>

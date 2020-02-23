@@ -1,18 +1,19 @@
 var data ={
-    labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+    labels: ['Post1', 'Post2', 'Post3', 'Post4', 'Post5', 'Post6', 'Post7', 'Post8', 'Post9', 'Post10', 'Post11', '12'],
     series: [
       [12, 9, 7, 8, 5, 4, 6, 2, 3, 3, 4, 6],
       [4,  5, 3, 7, 3, 5, 5, 3, 4, 4, 5, 5],
       [5,  3, 4, 5, 6, 3, 3, 4, 5, 6, 3, 4],
       [3,  4, 5, 6, 7, 6, 4, 5, 6, 7, 6, 3],
-      [100, 94, 57, 68, 75, 74, 76, 62, 53, 53, 45, 56],
-      [125, 95, 74, 83, 55, 46, 65, 25, 34, 33, 44, 64],
 
     ]
 };
 
 var options={
-
+chartPadding: {
+top : 10,
+right : 10
+}
 };
 var chart = new Chartist.Line('#linechart', data, options);
 
@@ -135,30 +136,103 @@ var chart = new Chartist.Line('#linechart', data, options);
 
 
 
-  var chart = new Chartist.Bar('#peakchart', {
-    labels: ['W1', 'W2', 'W3', 'W4', 'W5'],
+
+
+  // var data = {
+  //   labels: ['Winner 1', 'Winner 2', 'Winner 3', 'Winner 4', 'Winner 5'],
+  //   series: [
+  //     [1, 2, 4, 8, 6]
+  //   ]
+  // };
+
+  // var options = {
+  //   high: 5,
+  //   low: 0,
+  //   axisX: {
+  //     labelInterpolationFnc: function(value, index) {
+  //       return value;
+  //     }
+  //   },
+  //   seriesBarDistance: 30
+  // };
+
+  // var responsiveOptions = [
+  //   ['screen and (max-width: 640px)', {
+  //     seriesBarDistance: 5,
+  //     axisX: {
+  //       labelInterpolationFnc: function (value) {
+  //         return value[0];
+  //       }
+  //     }
+  //   }]
+  // ];
+
+
+
+  var data= {
+    labels: ['Anshul Bahrani', 'Avinash Bhawnani', 'Devansh Ahuja', 'Priya Karsi', 'ABC'],
     series: [
-      [10, 20, 48, 38, 6]
+      [12, 20, 100, 200, 5],
+
     ]
-  }, {
-    high: 10,
-    low: 0,
-    axisX: {
-      labelInterpolationFnc: function(value, index) {
+  };
+  var option ={
+    axisY: {
+      onlyInteger: true
+    },
+    fullWidth: true,
+    chartPadding: {
+      top : 10,
+      bottom: 0,
+      left: 10,
+    }
+  };
+  new Chartist.Bar('#bar-chart', data, option);
+
+  var data = {
+
+    series: [{
+      value: 20,
+      className: "cmpn"
+    },
+    {
+      value: 10,
+      className: "it"
+    },
+    {
+      value: 30,
+      className: "extc"
+    },
+    {
+      value: 40,
+      className: "etrx"
+    }
+  ]};
+
+
+  var options = {
+      donut: true,
+      donutWidth: 50,
+      showLabel: false,
+
+    labelInterpolationFnc: function(value) {
+      return value[0]
+    }
+  };
+
+  var responsiveOptions = [
+    ['screen and (min-width: 640px)', {
+      chartPadding: 30,
+      labelOffset: 100,
+      labelDirection: 'explode',
+      labelInterpolationFnc: function(value) {
         return value;
       }
-    }
-  });
+    }],
+    ['screen and (min-width: 1024px)', {
+      labelOffset: 80,
+      chartPadding: 0
+    }]
+  ];
 
-  // Listen for draw events on the bar chart
-  chart.on('draw', function(data) {
-    // If this draw event is of type bar we can use the data to create additional content
-    if(data.type === 'bar') {
-      // We use the group element of the current series to append a simple circle with the bar peek coordinates and a circle radius that is depending on the value
-      data.group.append(new Chartist.Svg('circle', {
-        cx: data.x2,
-        cy: data.y2,
-        r: Math.abs(Chartist.getMultiValue(data.value)) * 2 + 5
-      }, 'ct-slice-pie'));
-    }
-  });
+  new Chartist.Pie('.ct-square', data, options, responsiveOptions);

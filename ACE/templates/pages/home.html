@@ -1,22 +1,22 @@
 {% extends 'base.html' %}
-{% block content %}
+{% block bodycontent %}
   <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-12">
               <div class="card card-chart">
-                <div class="card-header card-header-danger">
-                  <div class="ct-chart" id="peakchart"></div>
+                <div class="card-header card-header-primary">
+                  <div class="ct-bar" id="bar-chart"></div>
                 </div>
                 <div class="card-body">
-                  <h4 class="card-title">Completed Tasks</h4>
-                  <p class="card-category">Last Campaign Performance</p>
+                  <h4 class="card-title">Winners vote count</h4>
+                  <p class="card-category">Last election Performance</p>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <i class="material-icons">access_time</i> campaign sent 2 days ago
+                    <i class="material-icons">multiline_chart</i> election sent 2 days ago
                   </div>
                 </div>
               </div>
-            </div>
+          </div>
           </div>
 
       <div class="row">
@@ -26,17 +26,36 @@
               <div class="ct-chart" id="linechart"></div>
             </div>
             <div class="card-body">
-              <h4 class="card-title">Daily Sales</h4>
+              <h4 class="card-title">Department analysis</h4>
               <p class="card-category">
-                <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
+                <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> vote count for each department on basis of posts</p>
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons">access_time</i> updated 4 minutes ago
+                <i class="material-icons">show_chart</i> updated 4 minutes ago
               </div>
             </div>
           </div>
         </div>
 
       </div>
+
+      <div class="row">
+          <div class="col-md-4">
+              <div class="card card-chart">
+                <div class="card-header ">
+                  <div class="ct-square" id="pie-chart"></div>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">Department wise votes</h4>
+                  <p class="card-category">Last election Performance</p>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">pie_chart</i> election sent 2 days ago
+                  </div>
+                </div>
+              </div>
+          </div>
+          </div>
 {% endblock %}
