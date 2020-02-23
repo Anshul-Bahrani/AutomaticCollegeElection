@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import CustomUser
+from .models import CustomUser, UserRole
 from .forms import UserRegisterForm
 
 admin.AdminSite.site_header = "Admin"
@@ -32,6 +32,8 @@ class CustomUserAdmin(BaseUserAdmin):
             'mobile',
             'gender',
             'date_Of_birth',
+            'department_id',
+            'role',
             'profile_pic',
         )}),
         ('Permissions', {'fields': (
@@ -59,3 +61,4 @@ class CustomUserAdmin(BaseUserAdmin):
     class Meta:
         model = CustomUser
 
+admin.site.register(UserRole)

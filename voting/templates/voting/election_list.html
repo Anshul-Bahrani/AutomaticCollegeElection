@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Position
+{% endblock title %}
+{% block bodycontent %}
+    <div class="container">
+      <a class="btn btn-primary" href="{% url 'voting:election_create' %}">
+        <i class="material-icons">add</i>
+        Add Election
+      </a>
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Elections</h4>
+            <!-- <p class="card-category"> Here is a subtitle for this table</p> -->
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>#</th>
+                    <th>Incharge</th>
+                    <th>Position</th>
+                    <th>Term</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for election in elections %}
+                    <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td>{{election.registrar}}</td>
+                      <td>{{election.position}}</td>
+                      <td>{{election.term_id}}</td>
+                      <td>{{election.start_at}}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% include 'includes/paginate.html' %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+{% endblock bodycontent %}

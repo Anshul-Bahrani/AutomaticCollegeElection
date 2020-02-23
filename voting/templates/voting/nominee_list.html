@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Position
+{% endblock title %}
+{% block bodycontent %}
+    <div class="container">
+      <a class="btn btn-primary" href="{% url 'voting:nominee_create' %}">
+        <i class="material-icons">add</i>
+        Add Nominee
+      </a>
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Nominee</h4>
+            <!-- <p class="card-category"> Here is a subtitle for this table</p> -->
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>#</th>
+                    <th>Nominee</th>
+                    <th>Election</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for nominee in nominees %}
+                    <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td>{{nominee.nominee_id}}</td>
+                      <td>{{nominee.election}}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% include 'includes/paginate.html' %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+{% endblock bodycontent %}

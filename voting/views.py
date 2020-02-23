@@ -48,13 +48,43 @@ class NomineeCreateView(CreateView):
         form.instance.nominee_id = self.request.user
         return super().form_valid(form)
 
+class NomineeListView(ListView):
+
+    template_name = 'voting/nominee_list.html'
+    model = Nominee
+    context_object_name = 'nominees'
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        # pylint: disable=arguments-differ
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['sidebarSection'] = 'nominee'
+        return context
+
 class ElectionCreateView(CreateView):
 
     model = Election
     template_name = 'voting/election-create.html'
-    fields = ['position', 'term', 'start_at', 'duration', 'nomination_deadline']
+    fields = ['position', 'term_id', 'start_at', 'duration', 'nomination_deadline']
     success_message = "%(title)s was created successfully"
 
     def form_valid(self, form):
         form.instance.registrar = self.request.user
         return super().form_valid(form)
+
+class ElectionListView(ListView):
+
+    template_name = 'voting/election_list.html'
+    model = Election
+    context_object_name = 'elections'
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        # pylint: disable=arguments-differ
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['sidebarSection'] = 'election'
+        return context
