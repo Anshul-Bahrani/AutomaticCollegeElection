@@ -1,19 +1,50 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block title %}
     Position
 {% endblock title %}
 {% block bodycontent %}
     <div class="container">
-        <form method='POST'>
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class='border-bottom mb-2 '>Add new Position</legend>
-                {{form|crispy}}
-            </fieldset>
-            <div class='form-group mx-auto'>
-                <input class='btn btn-outline-primary ' type="submit" value="Add">
+    <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">CREATING NEW POSITIONS:</h4>
+                  <p class="card-category">Add New Position</p>
+                </div>
+                <div class="card-body">
+                    <form method='POST'>
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          {% comment %} <label class="bmd-label-floating">Name of Post <img class="img-fluid" src="{% static 'img/name.svg'%}" alt=""></label>
+                          <input type="text" class="form-control"> {% endcomment %}
+                          {{form.name|as_crispy_field}}
+                        </div>
+                      </div>
+                            
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          {% comment %} <label class="bmd-label-floating">Add type! <img class="img-fluid" src="{% static 'img/type.svg' %}" alt=""></label>
+                          <input type="text" class="form-control"> {% endcomment %}
+                          {{form.type|as_crispy_field}}
+                        </div>
+                      </div>
+                    </div>
+                            
+                        </fieldset>
+                         <button type="submit" class="btn btn-primary pull-right">Submit Details</button>
+                    <div class="clearfix"></div>
+                    </form>
+                </div>
             </div>
-        </form>
+        </div>
+        </div>
+        </div>
     </div>
 {% endblock bodycontent %}

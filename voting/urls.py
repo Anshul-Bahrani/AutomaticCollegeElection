@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views as voting_views
 
-app_name = 'printer'
+app_name = 'voting'
 
 urlpatterns = [
 
