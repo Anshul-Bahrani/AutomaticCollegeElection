@@ -18,7 +18,46 @@
   stroke: brown;
 }
 
+
 .ct-chart .ct-series.ct-series-f .ct-point, .ct-chart .ct-series.ct-series-f .ct-line {
   stroke: rgb(0, 128, 64);
 }
 
+
+
+
+#bar-chart{
+    background-color: #55ae59;
+    width: 800px;
+    height: 350px;
+    font-family: Lato, Helvetica-Neue, monospace;
+}
+
+.ct-series-a .ct-bar {
+  /* Colour of your bars */
+  stroke:  white;
+  stroke-width: 30;
+}
+.ct-series-b .ct-bar {
+  /* Colour of your bars */
+  stroke:  #00a79d;
+  stroke-width: 30;
+}
+
+.ct-label {
+  color: white;
+}
+
+.cmpn {
+  stroke: #333;
+}
+
+.it {
+  stroke:red;
+}
+.extc {
+  stroke:blue;
+}
+.etrx {
+  stroke:green;
+}
