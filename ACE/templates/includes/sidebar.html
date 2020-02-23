@@ -23,7 +23,7 @@
             </a>
           </li>
           <!-- your sidebar here -->
-          {% if sidebarSection == 'position' %}
+          {% if sidebarSection == 'profile' %}
             <li class="nav-item active">
           {% else %}
             <li class="nav-item">
@@ -33,7 +33,11 @@
               <p>View Profile</p>
             </a>
           </li>
-          <li class="nav-item ">
+          {% if sidebarSection == 'position' %}
+            <li class="nav-item active">
+          {% else %}
+            <li class="nav-item">
+          {% endif %}
             <a class="nav-link" href="{% url 'voting:position_list' %}">
               <i class="material-icons"></i>
               <p>Position</p>
