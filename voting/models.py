@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
 
 from core.models import MetaDataModel
+from academics.models import Term
 from ACE.users.models import CustomUser
 
 
@@ -54,12 +55,12 @@ class Election(MetaDataModel):
     id = models.BigAutoField(primary_key=True)
     registrar = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
     position = models.ForeignKey(Position, on_delete=models.DO_NOTHING)
-    term = models.IntegerField()
+    term_id = models.ForeignKey(Term, on_delete=models.DO_NOTHING)
     start_at = models.DateTimeField()
-    duration = models.TimeField()
+    duration = models.DurationField()
     nomination_deadline = models.DateTimeField()
     def __str__(self):
-        return f"{self.term}-{self.position}"
+        return f"{self.start_at}"
 
 class ElectedMember(MetaDataModel):
 

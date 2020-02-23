@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Position
+{% endblock title %}
+{% block bodycontent %}
+    <div class="container">
+      <a class="btn btn-primary" href="{% url 'academics:term_create' %}">
+        <i class="material-icons">add</i>
+        Add Term
+      </a>
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Term</h4>
+            <!-- <p class="card-category"> Here is a subtitle for this table</p> -->
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>#</th>
+                    <th>Term</th>
+                    <th>Academic Year</th>
+                    <th>Department</th>
+                    <th>Semester</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for term in terms %}
+                    <tr>
+                      <td>{{ foorloop.counter }}</td>
+                      <td>{{term.term_id}}</td>
+                      <td>{{term.academic_year}}</td>
+                      <td>{{term.department_id}}</td>
+                      <td>{{term.sem}}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% include 'includes/paginate.html' %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+{% endblock bodycontent %}

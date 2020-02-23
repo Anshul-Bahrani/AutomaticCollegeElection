@@ -52,7 +52,7 @@ class ElectionCreateView(CreateView):
 
     model = Election
     template_name = 'voting/election-create.html'
-    fields = ['position', 'term', 'start_at', 'duration', 'nomination_deadline']
+    fields = ['position', 'term_id', 'start_at', 'duration', 'nomination_deadline']
     success_message = "%(title)s was created successfully"
 
     def form_valid(self, form):
