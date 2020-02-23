@@ -27,9 +27,6 @@
 
 
 #bar-chart{
-    background-color: #55ae59;
-    width: 800px;
-    height: 350px;
     font-family: Lato, Helvetica-Neue, monospace;
 }
 
@@ -37,6 +34,10 @@
   /* Colour of your bars */
   stroke:  white;
   stroke-width: 30;
+}
+#bar-chart .ct-grid ,#bar-chart .ct-grid{
+  stroke : white;
+  opacity : 0.2;
 }
 .ct-series-b .ct-bar {
   /* Colour of your bars */
@@ -59,5 +60,5 @@
   stroke:blue;
 }
 .etrx {
-  stroke:green;
+  stroke:grey;
 }
