@@ -57,6 +57,9 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     f"{APP_NAME}.users.apps.UsersConfig",
     "core.apps.CoreConfig",
+    "academics.apps.AcademicsConfig",
+    "staff.apps.StaffConfig",
+    "voting.apps.VotingConfig"
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

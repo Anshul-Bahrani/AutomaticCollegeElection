@@ -7,23 +7,25 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
 
+from core.models import MetaDataModel
+from academics.models import Department
 from .managers import CustomUserManager
+
+
+class UserRole(MetaDataModel):
+
+    role_name = models.CharField(max_length=500)
+    role_number = models.IntegerField()
+
+    def __str__(self):
+        return self.role_name
 
 class CustomUser(AbstractUser):
 
-    class Gender(Enum):
+    class GENDER(Enum):
         male = ('M', 'Male')
         female = ('F', 'Female')
         other = ('Ot', 'Other')
-
-        @classmethod
-        def get_value(cls, member):
-            return cls[member].value[0]
-
-    class UserType(Enum):
-
-        staff = (1, 'Staff')
-        client = (2, 'Client')
 
         @classmethod
         def get_value(cls, member):
@@ -41,7 +43,6 @@ class CustomUser(AbstractUser):
 
     username = None
     id = models.BigAutoField(primary_key=True)
-
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField(
@@ -52,11 +53,11 @@ class CustomUser(AbstractUser):
         },
     )
     mobile = models.BigIntegerField()
-    gender = models.CharField(max_length=10, choices=[x.value for x in Gender])
+    gender = models.CharField(max_length=10, choices=[x.value for x in GENDER])
     date_Of_birth = models.DateField()
+    department_id = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
     profile_pic = models.ImageField(default=DEFAULT_PROFILE_IMAGE, upload_to=profile_pic_path)
-    user_type = models.IntegerField(choices=[x.value for x in UserType])
-
+    role = models.ForeignKey(UserRole, on_delete=models.SET_NULL, null=True)
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -72,3 +73,17 @@ class CustomUser(AbstractUser):
 
     def get_absolute_url(self):
         return reverse('users:profile')
+
+class Student(MetaDataModel):
+
+    year_choices = [(i, i) for i in range(1984, datetime.datetime.now().year +1)]
+
+    @staticmethod
+    def current_year():
+        return datetime.date.today().year
+
+    id = models.BigAutoField(primary_key=True)
+    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    admission_year = models.IntegerField(_('year'), choices=year_choices)
+    addmission_type = models.BooleanField(default=0)
+    division = models.CharField(max_length=5, null=True, blank=True)
