@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+  {% block content %}
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">BECOME A LEADER</h4>
+                  <p class="card-category">leader profile</p>
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <div class="dropdown">
+                            <button class="btn btn-dark" type="button" id="dropdownpost" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Choose your post
+  <img src="{% static 'img/drop.svg' %}%" alt="noimg"></button>
+                              <div class="dropdown-menu" >
+                            <a class="dropdown-item" href="#">Cultural Incharge</a>
+                            <a class="dropdown-item" href="#">Class Incharge</a>
+                            <a class="dropdown-item" href="#">Sort Incharge</a>
+                            <a class="dropdown-item" href="#">Music Incharge</a>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">First Name <img class="img-fluid" src="../assets/img/user.svg" alt=""></label>
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Last Name <img class="img-fluid" src="../assets/img/user.svg" alt=""></label>
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Email address <img src="../assets/img/email1.svg" alt=""></label>
+                          <input type="email" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="bmd-label-floating" name="agenda">Agenda / Reason <img src="../assets/img/agenda.svg" alt=""></label>
+                          <textarea class="form-control" rows="5" id="comment"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="font-weight-bold">About Election: </label>
+                          <div class="form-group">
+                            <label class="small"> *The mandatory rule is that no malpractices would be tolerated. Details will be verified.</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary pull-right">Submit Details</button>
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-profile">
+                <div class="card-avatar">
+                  <a href="javascript:;">
+                    <img class="img" src="../assets/img/faces/marc.jpg" />
+                  </a>
+                </div>
+                <div class="card-body">
+
+                  <h6 class="card-title">Anshul Bahrani</h6>
+                  <h4 class="card-category text-gray">CMPN Department</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

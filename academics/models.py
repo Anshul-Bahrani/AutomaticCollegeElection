@@ -1,6 +1,5 @@
 import datetime
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
 
 from core.models import MetaDataModel
 
@@ -19,7 +18,10 @@ class Term(MetaDataModel):
     def current_year():
         return datetime.date.now().year
 
-    term_id = models.IntegerField()
+    term_id = models.IntegerField(unique=True)
     academic_year = models.PositiveIntegerField(choices=year_choices)
     deptartment = models.ForeignKey(Department, on_delete=models.CASCADE)
-    sem = models.PositiveIntegerField(choices=[(x, x) for x in range(1, 8)])
+    sem = models.PositiveIntegerField(choices=[(x, x) for x in range(1, 9)])
+
+    def __str__(self):
+        return self.term_id

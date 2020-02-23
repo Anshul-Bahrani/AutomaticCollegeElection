@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 class HomeView(TemplateView):
 
@@ -8,4 +7,5 @@ class HomeView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         # pylint: disable=unused-argument
-        return render(request, self.template_name)
+        context = {'sidebarSection': 'dashboard'}
+        return render(request, self.template_name, context)
