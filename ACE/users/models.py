@@ -52,9 +52,9 @@ class CustomUser(AbstractUser):
             'unique': _("A user with that email already exists."),
         },
     )
-    mobile = models.BigIntegerField()
-    gender = models.CharField(max_length=10, choices=[x.value for x in GENDER])
-    date_Of_birth = models.DateField()
+    mobile = models.BigIntegerField(null=True)
+    gender = models.CharField(max_length=10, choices=[x.value for x in GENDER], default='M')
+    date_Of_birth = models.DateField(null=True)
     department_id = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
     profile_pic = models.ImageField(default=DEFAULT_PROFILE_IMAGE, upload_to=profile_pic_path)
     role = models.ForeignKey(UserRole, on_delete=models.SET_NULL, null=True)

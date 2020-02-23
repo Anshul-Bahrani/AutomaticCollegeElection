@@ -47,6 +47,8 @@ urlpatterns = [
         name='password_reset_complete',
     ),
     path('tinymce/', include('tinymce.urls')),
+    path('accounts/', include('allauth.urls')),
+
     path('users/', include(f'{settings.APP_NAME}.users.urls', namespace='users')),
     path('voting/', include('voting.urls', namespace='voting')),
 ]
