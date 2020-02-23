@@ -10,7 +10,10 @@ var data ={
 };
 
 var options={
-
+chartPadding: {
+top : 10,
+right : 10
+}
 };
 var chart = new Chartist.Line('#linechart', data, options);
 
@@ -169,19 +172,19 @@ var chart = new Chartist.Line('#linechart', data, options);
   var data= {
     labels: ['Anshul Bahrani', 'Avinash Bhawnani', 'Devansh Ahuja', 'Priya Karsi', 'ABC'],
     series: [
-      [12, 9, 7, 8, 5],
+      [12, 20, 100, 200, 5],
 
     ]
   };
   var option ={
-    high: 10,
     axisY: {
       onlyInteger: true
     },
     fullWidth: true,
     chartPadding: {
+      top : 10,
       bottom: 0,
-      left: 0
+      left: 10,
     }
   };
   new Chartist.Bar('#bar-chart', data, option);
@@ -228,7 +231,7 @@ var chart = new Chartist.Line('#linechart', data, options);
     }],
     ['screen and (min-width: 1024px)', {
       labelOffset: 80,
-      chartPadding: 20
+      chartPadding: 0
     }]
   ];
 
