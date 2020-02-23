@@ -12,28 +12,45 @@
 
 {% block bodycontent %}
 
-    <div class="card container">
-      <div class="media card-header card-header-primary">
-          <img class="img-thumbnail rounded-circle img-fluid" style="height:125px;width:125px" src="{{ user.profile_pic.url }}" alt="user profile pic">
-          <div class="media-body p-4">
-              <h2>{{user.first_name|title}} {{user.last_name|title}}</h2>
+<div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                    <div class="row">
+                        <div class="col-md-5">
+                        <img class="img-thumbnail rounded-circle img-fluid" style="height:125px;width:125px" src="{{ user.profile_pic.url }}" alt="user profile pic">
+                        </div>
+                        <div class="col-md-7">
+                            <h2>{{user.first_name|title}} {{user.last_name|title}}</h2>
+          
+                                <h4 class="card-title">KNOW YOUR LEADER</h4>
+                            <p class="card-category">leader profile</p>
+                        </div>
+                    </div>
+                </div>
+                  <div class="card-body">
+                        <form method='POST'>
+          
+      
+              {% if form.is_multipart %}
+                  <form enctype="multipart/form-data" method="post">
+              {% else %}
+                  <form method="post">
+              {% endif %}
+                  {% csrf_token %}
+                  <fieldset class="form-group">
+                      
+                      
+                  </fieldset>
+                  <div class='form-group mx-auto'>
+                      <button class='btn btn-outline-primary'><i class="fas fa-edit"></i> Update</button>
+                  </div>
+              </form>
           </div>
-      </div>
 
-
-        {% if form.is_multipart %}
-            <form enctype="multipart/form-data" method="post">
-        {% else %}
-            <form method="post">
-        {% endif %}
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class='border-bottom mb-2 '>About</legend>
-                {{form|crispy}}
-            </fieldset>
-            <div class='form-group mx-auto'>
-                <button class='btn btn-outline-primary'><i class="fas fa-edit"></i> Update</button>
-            </div>
-        </form>
-    </div>
+                </div>
+                </div>
+                
 {% endblock bodycontent %}

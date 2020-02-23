@@ -44,7 +44,7 @@ class Nominee(MetaDataModel):
         verbose_name_plural = _('Nominees')
 
     def __str__(self):
-        return self.nominee_id
+        return f"{self.nominee_id}"
 
     def get_absolute_url(self):
         return reverse("voting:position_list")
