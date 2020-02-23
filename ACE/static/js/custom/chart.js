@@ -1,14 +1,57 @@
-var data ={
-    labels: ['Post1', 'Post2', 'Post3', 'Post4', 'Post5', 'Post6', 'Post7', 'Post8', 'Post9', 'Post10', 'Post11', '12'],
-    series: [
-      [12, 9, 7, 8, 5, 4, 6, 2, 3, 3, 4, 6],
-      [4,  5, 3, 7, 3, 5, 5, 3, 4, 4, 5, 5],
-      [5,  3, 4, 5, 6, 3, 3, 4, 5, 6, 3, 4],
-      [3,  4, 5, 6, 7, 6, 4, 5, 6, 7, 6, 3],
+myData = $('#takeData').val();
+if(myData != null) {
+    console.log(myData);
+    parsedData = JSON.parse(myData);
+    console.log(parsedData);
+    wannabelabels = []
+    for(var i = 0;i<parsedData.length;i ++) {
+      if(wannabelabels.indexOf(parsedData[i][2]) == -1) {
+        wannabelabels.push(parsedData[i][2]);
+      }
+    }
+    console.log(wannabelabels);
+    wannabedata = []
+    for(var i = 0;i<parsedData.length;i ++) {
+      if(wannabedata.indexOf(parsedData[i][0]) == -1) {
+        wannabedata.push(parsedData[i][0]);
+      }
+    }
+    console.log(wannabedata);
+    function zeros(dimensions) {
+      var array = [];
 
-    ]
-};
+      for (var i = 0; i < dimensions[0]; ++i) {
+          array.push(dimensions.length == 1 ? 0 : zeros(dimensions.slice(1)));
+      }
 
+      return array;
+    }
+    final = zeros([wannabedata.length, wannabelabels.length]);
+
+    for(var i = 0;i < parsedData.length;i++) {
+      if(wannabedata.indexOf(parsedData[i][0]) != -1 && wannabelabels.indexOf(parsedData[i][2]) != -1) {
+
+        final[wannabedata.indexOf(parsedData[i][0])][wannabelabels.indexOf(parsedData[i][2])] = parsedData[i][1];
+
+      }
+    }
+    var data ={
+      labels : wannabelabels,
+      series : final
+    };
+  }
+  else {
+    var data ={
+      labels: ['Post1', 'Post2', 'Post3', 'Post4', 'Post5', 'Post6', 'Post7', 'Post8', 'Post9', 'Post10', 'Post11', '12'],
+      series: [
+        [12, 9, 7, 8, 5, 4, 6, 2, 3, 3, 4, 6],
+        [4,  5, 3, 7, 3, 5, 5, 3, 4, 4, 5, 5],
+        [5,  3, 4, 5, 6, 3, 3, 4, 5, 6, 3, 4],
+        [3,  4, 5, 6, 7, 6, 4, 5, 6, 7, 6, 3],
+
+      ]
+  };
+  }
 var options={
 chartPadding: {
 top : 10,

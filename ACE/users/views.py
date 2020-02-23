@@ -9,9 +9,13 @@ from django.views import View
 from .models import CustomUser
 from .forms import UserRegisterForm, UserUpdateForm
 from voting.models import Nominee
+from django.db import connection
 
-
-
+def my_custom_sql(sql):
+    with connection.cursor() as cursor:
+        cursor.execute(sql)
+        rows = cursor.fetchall()
+    return rows
 # To systematically hide all local variables of a function from error logs,
 # do not provide any argument to the sensitive_variables decorator.
 # To systematically hide all POST parameters of a request in error reports,
@@ -73,9 +77,14 @@ class ProfileView(View):
 class CandidateProfileView(View):
     template_name = 'users/viewcandidates.html'
     def get(self, request, *args, **kwargs):
-        n = Nominee.objects.all()
+        id = request.user.id
+        sql = f'SELECT department_id_id FROM users_customuser WHERE id={id};'
+        answer = my_custom_sql(sql)
+        sql2 = f'SELECT users_customuser.first_name, users_customuser.last_name, voting_nominee.agenda FROM voting_nominee, users_customuser where voting_nominee.nominee_id_id = users_customuser.id AND users_customuser.department_id_id={answer[0][0]} AND voting_nominee.is_Verified = 1'
+        answer2 = my_custom_sql(sql2)
+        print(answer)
         context = {
-            'nom' : n,
+            'nom' : answer2,
         }
         return render(request, self.template_name, context)
 
