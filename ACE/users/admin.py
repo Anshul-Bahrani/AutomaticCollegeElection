@@ -30,7 +30,6 @@ class CustomUserAdmin(BaseUserAdmin):
             'gender',
             'date_Of_birth',
             'profile_pic',
-            'user_type',
         )}),
         ('Permissions', {'fields': (
             'is_active',
