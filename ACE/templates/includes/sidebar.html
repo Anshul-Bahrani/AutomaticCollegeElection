@@ -23,6 +23,7 @@
               <p>Dashboard</p>
             </a>
           </li>
+
           <!-- your sidebar here -->
           {% if sidebarSection == 'profile' %}
             <li class="nav-item active">
@@ -34,6 +35,7 @@
               <p>View Profile</p>
             </a>
           </li>
+
           {% if sidebarSection == 'position' %}
             <li class="nav-item active">
           {% else %}
@@ -44,6 +46,62 @@
               <p>Position</p>
             </a>
           </li>
+
+          {% if sidebarSection == 'term' %}
+            <li class="nav-item active">
+          {% else %}
+            <li class="nav-item">
+          {% endif %}
+            <a class="nav-link" href="{% url 'academics:term_list' %}">
+              <!-- <i class="material-icons">reorder</i> -->
+              <p>Term</p>
+            </a>
+          </li>
+
+          {% if sidebarSection == 'department' %}
+            <li class="nav-item active">
+          {% else %}
+            <li class="nav-item">
+          {% endif %}
+            <a class="nav-link" href="{% url 'academics:department_list' %}">
+              <!-- <i class="material-icons">reorder</i> -->
+              <p>Department</p>
+            </a>
+          </li>
+
+          {% if sidebarSection == 'ctcc' %}
+            <li class="nav-item active">
+          {% else %}
+            <li class="nav-item">
+          {% endif %}
+            <a class="nav-link" href="{% url 'staff:ctcc_list' %}">
+              <!-- <i class="material-icons">reorder</i> -->
+              <p>CTCC</p>
+            </a>
+          </li>
+
+          {% if sidebarSection == 'election' %}
+            <li class="nav-item active">
+          {% else %}
+            <li class="nav-item">
+          {% endif %}
+            <a class="nav-link" href="{% url 'voting:election_list' %}">
+              <!-- <i class="material-icons">reorder</i> -->
+              <p>Election</p>
+            </a>
+          </li>
+
+          {% if sidebarSection == 'nominee' %}
+            <li class="nav-item active">
+          {% else %}
+            <li class="nav-item">
+          {% endif %}
+            <a class="nav-link" href="{% url 'voting:nominee_list' %}">
+              <!-- <i class="material-icons">reorder</i> -->
+              <p>Nominee</p>
+            </a>
+          </li>
+
         </ul>
   </div>
 </div>

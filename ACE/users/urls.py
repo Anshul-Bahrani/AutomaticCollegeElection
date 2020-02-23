@@ -22,4 +22,5 @@ urlpatterns = [
          name='password_reset_complete'),
 
     path('profile/', users_views.ProfileView.as_view(), name='profile'),
+    path('candidate_profile/', users_views.CandidateProfileView.as_view(), name='viewcandidates'),
 ]

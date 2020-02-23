@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
 
 from core.models import MetaDataModel
+from academics.models import Term
 from ACE.users.models import CustomUser
 
 
@@ -44,30 +45,51 @@ class Nominee(MetaDataModel):
         verbose_name_plural = _('Nominees')
 
     def __str__(self):
-        return self.nominee_id
+        return f"{self.nominee_id}"
 
     def get_absolute_url(self):
-        return reverse("voting:position_list")
+        return reverse("voting:nominee_list")
 
 class Election(MetaDataModel):
 
     id = models.BigAutoField(primary_key=True)
     registrar = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
     position = models.ForeignKey(Position, on_delete=models.DO_NOTHING)
-    term = models.IntegerField()
+    term_id = models.ForeignKey(Term, on_delete=models.DO_NOTHING)
     start_at = models.DateTimeField()
-    duration = models.TimeField()
+    duration = models.DurationField()
     nomination_deadline = models.DateTimeField()
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = _('Election')
+        verbose_name_plural = _('Elections')
+
     def __str__(self):
-        return f"{self.term}-{self.position}"
+        return f"{self.position}-{self.term_id}"
+
+    def get_absolute_url(self):
+        return reverse("home")
+
+
 
 class ElectedMember(MetaDataModel):
 
     id = models.BigAutoField(primary_key=True)
     election = models.ForeignKey(Election, on_delete=models.CASCADE)
     member = models.ForeignKey(Nominee, on_delete=models.CASCADE)
+
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = _('ElectedMember')
+        verbose_name_plural = _('ElectedMembers')
+
     def __str__(self):
-        return "{self.election}-{self.member}"
+        return f"{self.election}-{self.member}"
+
+    def get_absolute_url(self):
+        return reverse("home")
 
 class Ballot(MetaDataModel):
 
@@ -75,8 +97,18 @@ class Ballot(MetaDataModel):
     election = models.ForeignKey(Election, on_delete=models.CASCADE)
     nominee = models.ForeignKey(Nominee, on_delete=models.CASCADE)
     voter = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = _('Ballot')
+        verbose_name_plural = _('Ballots')
+
     def __str__(self):
-        return "{self.election}-{self.nominee}-{self.voter}"
+        return f"{self.election}-{self.nominee}-{self.voter}"
+
+    def get_absolute_url(self):
+        return reverse("home")
 
 # class Prerequisite(MetaDataModel):
 

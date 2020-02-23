@@ -8,6 +8,8 @@ from django.views import View
 # from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import CustomUser
 from .forms import UserRegisterForm, UserUpdateForm
+from voting.models import Nominee
+
 
 
 # To systematically hide all local variables of a function from error logs,
@@ -67,3 +69,13 @@ class ProfileView(View):
             return redirect('users:profile')
 
         return render(request, self.template_name, context)
+
+class CandidateProfileView(View):
+    template_name = 'users/viewcandidates.html'
+    def get(self, request, *args, **kwargs):
+        n = Nominee.objects.all()
+        context = {
+            'nom' : n,
+        }
+        return render(request, self.template_name, context)
+
