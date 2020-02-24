@@ -47,6 +47,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
     'django.contrib.humanize',  # https://docs.djangoproject.com/en/2.2/ref/contrib/humanize/
+    "import_export"
 ]
 
 THIRD_PARTY_APPS = [
