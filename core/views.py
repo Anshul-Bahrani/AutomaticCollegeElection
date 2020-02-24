@@ -25,6 +25,25 @@ class HomeView(TemplateView):
             answer2.append(temp)
         answer = json.dumps(answer2)
         print(answer2)
+
+
+
+        id = request.user
+        tempquery = f"SELECT dept.id FROM academics_department as dept, users_customuser as user WHERE user.department_id_id = dept.id AND user.email = '{id}'"
+        ans = my_custom_sql(tempquery)
+        print(ans)
+        deptid = ans[0][0]
+
+
+        query2 = f'SELECT user.first_name, user.last_name, COUNT(*), MAX(election.start_at) FROM users_customuser as user, voting_electedmember as final, voting_election as election, voting_ballot as votes, academics_department as dept, academics_term as term WHERE final.election_id = election.id AND votes.election_id = final.election_id AND votes.nominee_id = final.member_id AND user.id = final.member_id AND term.department_id_id = {deptid} GROUP BY user.id'
+        baranswer = my_custom_sql(query2)
+        print(baranswer)
+        baranswer2 = list()
+        for i in baranswer:
+            tempo = datetime.datetime.strftime(i[3], "%y")
+            temp = tuple([i[0], i[1], i[2], tempo])
+            baranswer2.append(temp)
+        baranswer = json.dumps(baranswer2)
         # pylint: disable=unused-argument
-        context = {'sidebarSection': 'dashboard', 'answer' : answer}
+        context = {'sidebarSection': 'dashboard', 'answer' : answer, 'baranswer' : baranswer}
         return render(request, self.template_name, context)
