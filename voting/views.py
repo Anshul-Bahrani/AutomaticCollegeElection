@@ -4,6 +4,10 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
 from django.views import View
+from tablib import Dataset
+from .resources import NomineeResource
+
+
 from django.views.generic import (
     ListView,
     CreateView,
@@ -19,7 +23,7 @@ from .models import Position, Nominee, Election, Ballot
 
 class PositionListView(ListView):
 
-    template_name = 'voting/position-list.html'
+    template_name = 'voting.position-list.html'
     model = Position
     context_object_name = 'positions'
     paginate_by = 10
@@ -91,11 +95,31 @@ class ElectionListView(ListView):
         context['sidebarSection'] = 'election'
         return context
 
+def simple_upload(request):
+    # if request.method == 'GET':
+    #     nominee_resource = NomineeResource()
+    #     dataset = Dataset()
+    #     return render(request, "voting/import.html")
+
+    # if request.method == 'POST':
+    #     nominee_resource = NomineeResource()
+    #     dataset = Dataset(['', 'New nominees'], headers=['id', 'agenda'])
+    #     new_nominees = request.FILES['myfile']
+
+    #     result = nominee_resource.import_data(dataset, dry_run=True)  # Test the data import
+
+    #     if not result.has_errors():
+    #         nominee_resource.import_data(dataset, dry_run=False)  # Actually import now
+
+    return redirect('/admin/voting/nominee/import/')
+
 class VotingView(LoginRequiredMixin, View):
 
     template_name = 'voting/voting.html'
     def get(self, request, *args, **kwargs):
         user = CustomUser.objects.get(pk=request.user.pk)
+        if user.role != 2:
+            return HttpResponse("404")
         student = Student.objects.get(user_id=user.pk)
         staff = StaffCtCcAllotment.objects.filter(division=student.division).first()
         election = Election.objects.filter(Q(registrar=staff.class_teacher) | Q(registrar=staff.class_counsellor))
