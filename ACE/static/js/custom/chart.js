@@ -212,16 +212,37 @@ var chart = new Chartist.Line('#linechart', data, options);
   //     }
   //   }]
   // ];
+ var raw = $('#takeBarData').val();
+ console.log(raw);
+ if (raw != null) {
+ var bardata = JSON.parse(raw);
+ console.log(bardata);
+ myLabels = [];
+ mySeriesh = [];
+ mySeries = [];
+ mySeriesh.push(mySeries);
+ for (var i = 0; i < bardata.length;i++) {
+  first = bardata[i][0] + bardata[i][1];
+  console.log(bardata[i][0], bardata[i][1]);
+  myLabels.push(first);
+  mySeries.push(bardata[i][2]);
+ }
+  console.log(myLabels);
+  console.log(mySeriesh);
+  var data= {
+    labels: myLabels,
+    series: mySeriesh
+  };
+ }
 
-
-
+ else {
   var data= {
     labels: ['Anshul Bahrani', 'Avinash Bhawnani', 'Devansh Ahuja', 'Priya Karsi', 'ABC'],
     series: [
       [12, 20, 100, 200, 5],
-
     ]
   };
+}
   var option ={
     axisY: {
       onlyInteger: true
@@ -258,7 +279,7 @@ var chart = new Chartist.Line('#linechart', data, options);
 
   var options = {
       donut: true,
-      donutWidth: 50,
+      donutWidth: 60,
       showLabel: false,
 
     labelInterpolationFnc: function(value) {
