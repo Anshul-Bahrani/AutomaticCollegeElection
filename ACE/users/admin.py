@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import CustomUser, UserRole
+from .models import CustomUser, UserRole, Student
 from .forms import UserRegisterForm
 
 admin.AdminSite.site_header = "Admin"
@@ -60,3 +60,4 @@ class CustomUserAdmin(BaseUserAdmin):
         model = CustomUser
 
 admin.site.register(UserRole)
+admin.site.register(Student)

@@ -41,11 +41,12 @@
             {% endif %}
           {% endfor %}
         {% endif %}
-
-          {% block bodycontent %}
-          {% endblock %}
-          {% block content %}
-          {% endblock %}
+          <div class="text-dark">
+            {% block bodycontent %}
+            {% endblock %}
+            {% block content %}
+            {% endblock %}
+          </div>
         </div>
       </div>
       {% include 'includes/footer.html' %}
