@@ -7,10 +7,13 @@
 
   {% block css%}
       <link href="{% static 'css/custom/chart.css' %}" rel="stylesheet" />
+      <link href="{% static 'css/custom/preloader.css' %}" rel="stylesheet" />
   {% endblock%}
 </head>
 
 <body style="color:white;">
+<div class="pre-loader">
+</div>
   <div class="wrapper ">
 
     {% include 'includes/sidebar.html' %}
@@ -63,3 +66,8 @@
   <script src="{% static 'js/custom/chart.js' %}"></script>
   {% block javascript %}{% endblock %}
 </html>
+<script>
+$(window).on('load', function() {
+  $(".pre-loader").fadeOut('slow');
+});
+</script>
