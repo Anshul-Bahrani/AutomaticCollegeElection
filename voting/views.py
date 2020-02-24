@@ -96,6 +96,8 @@ class VotingView(LoginRequiredMixin, View):
     template_name = 'voting/voting.html'
     def get(self, request, *args, **kwargs):
         user = CustomUser.objects.get(pk=request.user.pk)
+        if user.role != 2:
+            return HttpResponse("404")
         student = Student.objects.get(user_id=user.pk)
         staff = StaffCtCcAllotment.objects.filter(division=student.division).first()
         election = Election.objects.filter(Q(registrar=staff.class_teacher) | Q(registrar=staff.class_counsellor))
