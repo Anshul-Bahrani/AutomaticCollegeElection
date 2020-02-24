@@ -13,4 +13,7 @@ urlpatterns = [
     path('election-list/', voting_views.ElectionListView.as_view(), name='election_list'),
     path('simple_upload/', voting_views.simple_upload, name='simple_upload'),
 
+    path('voting/', voting_views.VotingView.as_view(), name='voting'),
+    path('election-nominee/<int:pk>/', voting_views.ElectionNommineeListView.as_view(), name='election_nominee'),
+    path('vote/<int:election>/<int:nominee>/', voting_views.VoteView.as_view(), name='vote'),
 ]

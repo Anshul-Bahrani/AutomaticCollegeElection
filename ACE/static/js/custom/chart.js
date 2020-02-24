@@ -2,11 +2,13 @@ myData = $('#takeData').val();
 if(myData != null) {
     console.log(myData);
     parsedData = JSON.parse(myData);
+    console.log("Parsed data");
     console.log(parsedData);
     wannabelabels = []
     for(var i = 0;i<parsedData.length;i ++) {
-      if(wannabelabels.indexOf(parsedData[i][2]) == -1) {
-        wannabelabels.push(parsedData[i][2]);
+      if(wannabelabels.indexOf(parsedData[i][3]) == -1) {
+        wannabelabels.push(parsedData[i][3]);
+        console.log(parsedData[i][3]);
       }
     }
     console.log(wannabelabels);
@@ -29,9 +31,9 @@ if(myData != null) {
     final = zeros([wannabedata.length, wannabelabels.length]);
 
     for(var i = 0;i < parsedData.length;i++) {
-      if(wannabedata.indexOf(parsedData[i][0]) != -1 && wannabelabels.indexOf(parsedData[i][2]) != -1) {
+      if(wannabedata.indexOf(parsedData[i][0]) != -1 && wannabelabels.indexOf(parsedData[i][3]) != -1) {
 
-        final[wannabedata.indexOf(parsedData[i][0])][wannabelabels.indexOf(parsedData[i][2])] = parsedData[i][1];
+        final[wannabedata.indexOf(parsedData[i][0])][wannabelabels.indexOf(parsedData[i][3])] = parsedData[i][1];
 
       }
     }
@@ -55,7 +57,8 @@ if(myData != null) {
 var options={
 chartPadding: {
 top : 10,
-right : 10
+right : 10,
+bottom : 0,
 }
 };
 var chart = new Chartist.Line('#linechart', data, options);

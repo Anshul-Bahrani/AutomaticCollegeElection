@@ -8,7 +8,7 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header card-header-primary">
-        <h4 class="card-title ">Election</h4>
+        <h4 class="card-title ">Nominees</h4>
         <!-- <p class="card-category"> Here is a subtitle for this table</p> -->
       </div>
       <div class="card-body">
@@ -17,16 +17,18 @@
             <thead class=" text-primary">
               <tr>
                 <th>#</th>
-                <th>Position</th>
-                <th>Date</th>
+                <th>Name</th>
+                <th>agenda</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              {% for election in elections %}
+              {% for nominee in nominees %}
                 <tr>
-                  <td>{{ foorloop.counter }}</td>
-                  <td><a href="{% url 'voting:election_nominee' election.pk %}">{{election.position}}</a></td>
-                  <td>{{election.start_at}}</td>
+                  <td>{{ forloop.counter }}</td>
+                  <td>{{ nominee.nominee_id.email }}</td>
+                  <td>{{nominee.agenda}}</td>
+                  <td><a href="{% url 'voting:vote' election=nominee.election.pk nominee=nominee.pk %}" class="btn btn-primary">Vote</a></td>
                 </tr>
               {% endfor %}
             </tbody>

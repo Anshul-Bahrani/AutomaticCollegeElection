@@ -27,7 +27,7 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST, request.FILES)
         if form.is_valid():
-            form.instance.user_type = CustomUser.UserType.get_value("client")
+            # form.instance.user_type = CustomUser.UserType.get_value("client")
             form.instance.is_active = 0
             user = form.save()
             email = form.cleaned_data.get('email')

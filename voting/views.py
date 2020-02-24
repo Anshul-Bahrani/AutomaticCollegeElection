@@ -16,7 +16,9 @@ from django.views.generic import (
     DetailView,
 )
 
-from .models import Position, Nominee, Election
+from ACE.users.models import CustomUser, Student
+from staff.models import StaffCtCcAllotment
+from .models import Position, Nominee, Election, Ballot
 
 
 class PositionListView(ListView):
@@ -111,8 +113,43 @@ def simple_upload(request):
 
     return redirect('/admin/voting/nominee/import/')
 
-# class VotingView(View):
+class VotingView(LoginRequiredMixin, View):
 
-#     def get(self, request, *args, **kwargs):
-#         user = request.user
+    template_name = 'voting/voting.html'
+    def get(self, request, *args, **kwargs):
+        user = CustomUser.objects.get(pk=request.user.pk)
+        student = Student.objects.get(user_id=user.pk)
+        staff = StaffCtCcAllotment.objects.filter(division=student.division).first()
+        election = Election.objects.filter(Q(registrar=staff.class_teacher) | Q(registrar=staff.class_counsellor))
+        context = {
+            'elections': election,
+        }
 
+        return render(request, self.template_name, context)
+
+class ElectionNommineeListView(LoginRequiredMixin, View):
+
+    template_name = 'voting/election_nominee.html'
+    def get(self, request, *args, **kwargs):
+        election = get_object_or_404(Election, pk=self.kwargs.get('pk'))
+        nominees = Nominee.objects.filter(election=election)
+        context = {
+                'nominees': nominees,
+            }
+
+        return render(request, self.template_name, context)
+
+class VoteView(LoginRequiredMixin, View):
+
+    template_name = 'voting/vote.html'
+    def get(self, request, *args, **kwargs):
+        election = get_object_or_404(Election, pk=self.kwargs.get('election'))
+        nominee = get_object_or_404(Nominee, pk=self.kwargs.get('nominee'))
+        user = CustomUser.objects.get(pk=request.user.pk)
+        vote = Ballot()
+        vote.election = election
+        vote.nominee = nominee
+        vote.voter = user
+        vote.save()
+        messages.add_message(request, messages.SUCCESS, "ThankYou for your vote")
+        return redirect('home')
