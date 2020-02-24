@@ -11,4 +11,7 @@ urlpatterns = [
     path('nominee-list/', voting_views.NomineeListView.as_view(), name='nominee_list'),
     path('election-create/', voting_views.ElectionCreateView.as_view(), name='election_create'),
     path('election-list/', voting_views.ElectionListView.as_view(), name='election_list'),
+    path('voting/', voting_views.VotingView.as_view(), name='voting'),
+    path('election-nominee/<int:pk>/', voting_views.ElectionNommineeListView.as_view(), name='election_nominee'),
+    path('vote/<int:election>/<int:nominee>/', voting_views.VoteView.as_view(), name='vote'),
 ]
