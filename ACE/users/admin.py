@@ -3,13 +3,14 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import CustomUser, UserRole
 from .forms import UserRegisterForm
+from import_export.admin import ImportExportModelAdmin 
 
 admin.AdminSite.site_header = "Admin"
 admin.AdminSite.site_title = "Site admin"
 admin.AdminSite.index_title = "site adminstration"
 
 @admin.register(CustomUser)
-class CustomUserAdmin(BaseUserAdmin):
+class CustomUserAdmin(ImportExportModelAdmin):
 
     list_display = ('__str__', 'first_name', 'last_name', 'role', 'department_id', 'is_active', 'last_login')
     list_display_links = ('__str__',)

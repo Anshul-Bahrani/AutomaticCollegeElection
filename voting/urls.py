@@ -11,4 +11,6 @@ urlpatterns = [
     path('nominee-list/', voting_views.NomineeListView.as_view(), name='nominee_list'),
     path('election-create/', voting_views.ElectionCreateView.as_view(), name='election_create'),
     path('election-list/', voting_views.ElectionListView.as_view(), name='election_list'),
+    path('simple_upload/', voting_views.simple_upload, name='simple_upload'),
+
 ]

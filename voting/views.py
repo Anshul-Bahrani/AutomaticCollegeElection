@@ -4,6 +4,10 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
 from django.views import View
+from tablib import Dataset
+from .resources import NomineeResource
+
+
 from django.views.generic import (
     ListView,
     CreateView,
@@ -17,7 +21,7 @@ from .models import Position, Nominee, Election
 
 class PositionListView(ListView):
 
-    template_name = 'voting/position-list.html'
+    template_name = 'voting.position-list.html'
     model = Position
     context_object_name = 'positions'
     paginate_by = 10
@@ -88,6 +92,24 @@ class ElectionListView(ListView):
         # Add in a QuerySet of all the books
         context['sidebarSection'] = 'election'
         return context
+
+def simple_upload(request):
+    # if request.method == 'GET':
+    #     nominee_resource = NomineeResource()
+    #     dataset = Dataset()
+    #     return render(request, "voting/import.html")
+
+    # if request.method == 'POST':
+    #     nominee_resource = NomineeResource()
+    #     dataset = Dataset(['', 'New nominees'], headers=['id', 'agenda'])
+    #     new_nominees = request.FILES['myfile']
+
+    #     result = nominee_resource.import_data(dataset, dry_run=True)  # Test the data import
+
+    #     if not result.has_errors():
+    #         nominee_resource.import_data(dataset, dry_run=False)  # Actually import now
+
+    return redirect('/admin/voting/nominee/import/')
 
 # class VotingView(View):
 
