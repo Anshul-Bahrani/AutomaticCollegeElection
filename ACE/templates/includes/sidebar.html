@@ -24,7 +24,7 @@
             </a>
           </li>
 
-          {% if user.role == 1 %}
+          {% if user.role.role_number == 1 %}
             <!-- your sidebar here -->
           {% if sidebarSection == 'profile' %}
           <li class="nav-item active">
@@ -91,6 +91,21 @@
             <p>Election</p>
           </a>
         </li>
+        <!-- <button class="btn btn-danger">{{user.is_admin}}</button> -->
+        {% if user.is_superuser %}
+          {% if sidebarSection == 'election' %}
+            <li class="nav-item active">
+          {% else %}
+            <li class="nav-item">
+          {% endif %}
+            <a class="nav-link" href="{% url 'voting:simple_upload' %}">
+              <!-- <i class="material-icons">reorder</i> -->
+              <p>Upload Excel</p>
+            </a>
+          </li>
+        {% endif %}
+
+
           {% else %}
             {% if sidebarSection == 'nominee' %}
               <li class="nav-item active">
